@@ -1,0 +1,61 @@
+<script setup>
+import axios from 'axios';
+//import { onMounted, ref } from 'vue';
+defineProps({
+  post_id: {
+    type: String,
+    required: true,
+  },
+})
+//let feedData = ref([])
+let content;
+
+async function create(){
+    try {
+        const response = await axios.post('/api/v1/posts', {
+        content: content,
+        user_id: localStorage.getItem("userId")
+    });
+
+    console.log('Server response:', response.data);
+    alert("post created")
+
+    } catch (error) {
+        console.error('Failed to fetch feeds:', error);
+        alert("post failed creating")
+    }
+}
+
+
+</script>
+
+<template>
+  <div>
+    <h3>
+      This is the post creation
+    </h3>
+  </div>
+  <div>
+    <textarea name="content" id="contentArea" v-model="content"></textarea>
+    <br>
+    <button v-on:click="create">Publish</button>
+  </div>
+</template>
+
+<style scoped>
+h1 {
+  font-weight: 500;
+  font-size: 2.6rem;
+  position: relative;
+  top: -10px;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+div{
+    background-color: rgb(73, 8, 252);
+    color:black;
+}
+</style>
