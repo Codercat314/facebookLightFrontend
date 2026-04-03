@@ -1,22 +1,26 @@
 <script setup>
 import axios from 'axios';
-//import { onMounted, ref } from 'vue';
-defineProps({
+import { onMounted, ref } from 'vue';
+const props = defineProps({
   post_id: {
     type: String,
     required: true,
   },
 })
-//let feedData = ref([])
-let content;
+let likeNumber = ref()
+let buttonLook = ref()
 
-async function create(){
+async function like(){
     try {
-        const response = await axios.post('/api/v1/posts', {
-        content: content,
+        console.log(props.post_id)
+        console.log(localStorage.getItem("userId"))
+        
+        const response = await axios.post('/api/v1/like', {
+        post_id: props.post_id,
         user_id: localStorage.getItem("userId")
-    });
 
+        
+    });
     console.log('Server response:', response.data);
     alert("post created")
 
@@ -26,19 +30,33 @@ async function create(){
     }
 }
 
+async function getLikeNumber(){
+    try {
+        const response = await axios.get('/api/v1/like/' + props.post_id);
+        likeNumber.value = response.data; // reactive update
+        console.log('likenumber loaded:', likeNumber.value);
 
+        const didUserLike = await axios.post('/api/v1/likeCheck', {
+        post_id: props.post_id,
+        user_id: localStorage.getItem("userId")
+    });
+
+        buttonLook.value = didUserLike.data; // reactive update
+        console.log('valueif user liked loaded:', buttonLook.value);
+    } catch (error) {
+        console.error('Failed to fetch feeds:', error);
+    }
+}
+
+onMounted(()=>{
+  getLikeNumber()
+})
 </script>
 
 <template>
   <div>
-    <h3>
-      This is the post creation
-    </h3>
-  </div>
-  <div>
-    <textarea name="content" id="contentArea" v-model="content"></textarea>
-    <br>
-    <button v-on:click="create">Publish</button>
+    <button v-on:click="like" :class="buttonLook">like!</button>
+    <p>{{ likeNumber }}</p>
   </div>
 </template>
 
@@ -57,5 +75,9 @@ h3 {
 div{
     background-color: rgb(73, 8, 252);
     color:black;
+}
+
+.liked{
+  background-color: blue;
 }
 </style>

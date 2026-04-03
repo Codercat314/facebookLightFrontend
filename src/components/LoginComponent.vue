@@ -33,11 +33,13 @@ async function login(){
     </h3>
   </div>
   <div>
+    
     <input type="email" name="email" id="emailId" v-model="email">
     <br>
     <input type="password" name="password" id="pass" v-model="password">
     <br>
     <button v-on:click="login">Log in</button>
+
   </div>
 </template>
 

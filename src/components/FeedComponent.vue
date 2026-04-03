@@ -1,6 +1,7 @@
 <script setup>
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
+import LikeButton from './LikeButton.vue';
 
 let feedData = ref([])
 
@@ -30,6 +31,7 @@ onMounted(()=>{
     <hr>
     <h2>{{ feed.content }}</h2>
     <p>{{ feed.created_at }}</p>
+    <LikeButton :post_id='feed.id' />
   </div>
 </template>
 
