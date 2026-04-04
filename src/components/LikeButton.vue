@@ -12,8 +12,7 @@ let buttonLook = ref()
 
 async function like(){
     try {
-        console.log(props.post_id)
-        console.log(localStorage.getItem("userId"))
+        console.log("postLiked")
         
         const response = await axios.post('/api/v1/like', {
         post_id: props.post_id,
@@ -32,9 +31,12 @@ async function like(){
 
 async function getLikeNumber(){
     try {
+        
+        console.log(props.post_id)
         const response = await axios.get('/api/v1/like/' + props.post_id);
         likeNumber.value = response.data; // reactive update
         console.log('likenumber loaded:', likeNumber.value);
+        console.log(response.data)
 
         const didUserLike = await axios.post('/api/v1/likeCheck', {
         post_id: props.post_id,
@@ -73,11 +75,15 @@ h3 {
 }
 
 div{
-    background-color: rgb(73, 8, 252);
+    background-color: rgb(8, 252, 8);
     color:black;
 }
 
 .liked{
   background-color: blue;
+}
+
+.notLiked{
+  background-color: rgb(255, 0, 200);
 }
 </style>
