@@ -2,6 +2,7 @@
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import LikeButton from './LikeButton.vue';
+import ProfileComponent from './ProfileComponent.vue';
 
 let feedData = ref([])
 
@@ -32,6 +33,7 @@ onMounted(()=>{
     <h2>{{ feed.content }}</h2>
     <p>{{ feed.created_at }}</p>
     <LikeButton :post_id='feed.id' />
+    <ProfileComponent :user_id='feed.user_id'/>
   </div>
 </template>
 
