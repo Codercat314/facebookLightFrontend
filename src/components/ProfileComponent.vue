@@ -6,6 +6,10 @@ const props = defineProps({
     type: String,
     required: true,
   },
+  connection_id: {
+    type: String,
+    required: false,
+  },
 })
 let userInfo = ref("default")
 let friend = ref(true)
@@ -44,6 +48,34 @@ async function sendFriendRequest(){
   }
 }
 
+async function accept(){
+  try {
+        
+        console.log(userOwn)
+        const response = await axios.post('/api/v1/friend/accept', {
+        id : props.connection_id
+    });
+        console.log(response)
+    
+  } catch (error) {
+      console.error('Failed to fetch feeds:', error);
+  }
+}
+
+async function deny(){
+  try {
+        
+        console.log(userOwn)
+        const response = await axios.post('/api/v1/friend/deny', {
+        id : props.connection_id
+    });
+        console.log(response)
+    
+  } catch (error) {
+      console.error('Failed to fetch feeds:', error);
+  }
+}
+
 onMounted(()=>{
   getUserInfo()
 })
@@ -54,7 +86,9 @@ onMounted(()=>{
     <p>
       <img src="../assets/defaultProfile.png" alt="default profile pic"> 
       {{ userInfo.displayname }}
-      <button v-if="!(friend == 2 || props.user_id == userOwn)" v-on:click="sendFriendRequest">follow</button>
+      <button v-if="!(friend == 2 || props.user_id == userOwn || connection_id)" v-on:click="sendFriendRequest">follow</button>
+      <button v-if="connection_id" v-on:click="accept">Accept request</button>
+      <button v-if="connection_id" v-on:click="deny">Deny request</button>
       
     
     </p>

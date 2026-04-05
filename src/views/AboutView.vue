@@ -2,6 +2,7 @@
 import CreatePost from '@/components/CreatePost.vue';
 import FeedComponent from '@/components/FeedComponent.vue';
 import FriendList from '@/components/FriendList.vue';
+import FriendRequests from '@/components/FriendRequests.vue';
 import LoginComponent from '@/components/LoginComponent.vue';
 import RegisterComponent from '@/components/RegisterComponent.vue';
 import UsersList from '@/components/UsersList.vue';
@@ -12,6 +13,7 @@ import UsersList from '@/components/UsersList.vue';
   <LoginComponent/>
   <RegisterComponent/>
   <CreatePost/>
+  <FriendRequests/>
   <FriendList/>
   <UsersList/>
   </div>
