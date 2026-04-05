@@ -8,19 +8,40 @@ const props = defineProps({
   },
 })
 let userInfo = ref("default")
-
+let friend = ref(true)
+let userOwn = localStorage.getItem("userId")
 async function getUserInfo(){
     try {
         
         console.log(props.post_id)
         const response = await axios.get('/api/v1/you/' + props.user_id);
         userInfo.value = response.data; // reactive update
-        console.log('likenumber loaded:', userInfo.value);
+        console.log('usernumber loaded:', userInfo.value);
         console.log(response.data)
+
+        const friendCheck = await axios.get('/api/v1/friend/check/' + props.user_id);
+        friend.value = friendCheck.data.status; // reactive update
+        console.log('usernumber loaded:', friend.value);
+        console.log(friendCheck.data)
     
     } catch (error) {
         console.error('Failed to fetch feeds:', error);
     }
+}
+
+async function sendFriendRequest(){
+  try {
+        
+        console.log(userOwn)
+        const response = await axios.post('/api/v1/friend/', {
+        sender_id : userOwn,
+        recipient_id : props.user_id
+    });
+        console.log(response)
+    
+  } catch (error) {
+      console.error('Failed to fetch feeds:', error);
+  }
 }
 
 onMounted(()=>{
@@ -30,7 +51,13 @@ onMounted(()=>{
 
 <template>
   <div>
-    <p><img src="../assets/defaultProfile.png" alt="default profile pic"> {{ userInfo.displayname }}</p>
+    <p>
+      <img src="../assets/defaultProfile.png" alt="default profile pic"> 
+      {{ userInfo.displayname }}
+      <button v-if="!(friend == 2 || props.user_id == userOwn)" v-on:click="sendFriendRequest">follow</button>
+      
+    
+    </p>
   </div>
 </template>
 
