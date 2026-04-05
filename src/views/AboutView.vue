@@ -4,6 +4,7 @@ import FeedComponent from '@/components/FeedComponent.vue';
 import FriendList from '@/components/FriendList.vue';
 import FriendRequests from '@/components/FriendRequests.vue';
 import LoginComponent from '@/components/LoginComponent.vue';
+import RecommendedFriends from '@/components/RecommendedFriends.vue';
 import RegisterComponent from '@/components/RegisterComponent.vue';
 import UsersList from '@/components/UsersList.vue';
 </script>
@@ -16,6 +17,7 @@ import UsersList from '@/components/UsersList.vue';
   <FriendRequests/>
   <FriendList/>
   <UsersList/>
+  <RecommendedFriends/>
   </div>
 </template>
 
