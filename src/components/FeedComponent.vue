@@ -31,8 +31,8 @@ onMounted(()=>{
 
       </div>
       <div class="container">
-        <LikeButton :post_id='feed.id' />
         <ProfileComponent :user_id='feed.user_id'/>
+        <LikeButton :post_id='feed.id' />
 
       </div>
     </div>

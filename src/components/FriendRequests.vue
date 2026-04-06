@@ -25,32 +25,31 @@ onMounted(()=>{
 </script>
 
 <template>
-  <div>
+  <div class="head">
     <h3>
       This is your friend requests
     </h3>
   </div>
-  <div v-for="friend in friends" :key="friend.id">
-    <hr>
-    
+  <div v-for="friend in friends" :key="friend.id" class="friendcard">
     <ProfileComponent :user_id="friend.sender_id" :connection_id="friend.id"/>
   </div>
 </template>
 
 <style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
-}
 
-h3 {
-  font-size: 1.2rem;
-}
 
-div{
-    background-color: rgb(243, 118, 1);
+.head{
+    background-color: var(--contrast);
     color: black;
+    padding: 10px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border: 1px solid var(--darkColor);
 }
+.friendcard{
+  background-color: var(--whiteColor);
+  padding: 10px;
+  border: 1px solid var(--darkColor);
+}
+
 </style>

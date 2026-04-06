@@ -92,12 +92,6 @@ onMounted(()=>{
 </template>
 
 <style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
-}
 
 img {
   width: 30px;
@@ -105,13 +99,11 @@ img {
   border-radius: 15px;
 }
 
-
-
 div{
     
     color:black;
-    text-align: right;
-    width: 50%;
+    padding-left: 15px;
+    
     padding-right: 30px;
     border-radius: 30px;
 }
@@ -119,6 +111,7 @@ div{
 button{
   background-color: var(--contrast);
   border: none;
+  margin: 5px;
 }
 
 

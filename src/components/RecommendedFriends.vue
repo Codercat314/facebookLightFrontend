@@ -25,33 +25,31 @@ onMounted(()=>{
 </script>
 
 <template>
-  <div>
+  <div class="head">
     <h3>
       This is your recommended friends
     </h3>
   </div>
-  <div v-for="friend in friends" :key="friend.id">
-    
-    
+  <div v-for="friend in friends" :key="friend.id" class="friendcard">
     <ProfileComponent :user_id="friend.recipient_id"/>
     <p>Number of shared friends {{ friend.count }}</p>
   </div>
 </template>
 
 <style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
-}
-
-h3 {
-  font-size: 1.2rem;
-}
-
-div{
-    background-color: rgb(152, 3, 252);
+.head{
+    background-color: var(--contrast);
     color: black;
+    padding: 10px;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+    border: 1px solid var(--darkColor);
+
+    margin-top: 50px;
+}
+.friendcard{
+  background-color: var(--whiteColor);
+  padding: 10px;
+  border: 1px solid var(--darkColor);
 }
 </style>

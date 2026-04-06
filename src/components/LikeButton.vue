@@ -70,6 +70,7 @@ div{
     width: 50%;
     padding-left: 30px;
     border-radius: 30px;
+    text-align: right;
 }
 
 .liked{
