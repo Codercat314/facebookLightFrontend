@@ -1,6 +1,6 @@
 <script setup>
 import CreatePost from '@/components/CreatePost.vue';
-import FeedComponent from '@/components/FeedComponent.vue';
+
 import FriendList from '@/components/FriendList.vue';
 import FriendRequests from '@/components/FriendRequests.vue';
 import LoginComponent from '@/components/LoginComponent.vue';
@@ -10,7 +10,7 @@ import UsersList from '@/components/UsersList.vue';
 </script>
 <template>
   <div class="about">
-  <FeedComponent/>
+  
   <LoginComponent/>
   <RegisterComponent/>
   <CreatePost/>

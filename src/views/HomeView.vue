@@ -1,9 +1,11 @@
 <script setup>
-import TheWelcome from '../components/TheWelcome.vue'
+import FeedComponent from '@/components/FeedComponent.vue';
+
+
 </script>
 
 <template>
   <main>
-    <TheWelcome />
+    <FeedComponent/>
   </main>
 </template>

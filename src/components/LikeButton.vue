@@ -58,32 +58,28 @@ onMounted(()=>{
 <template>
   <div>
     <button v-on:click="like" :class="buttonLook">like!</button>
-    <p>{{ likeNumber }}</p>
+    {{ likeNumber }}
   </div>
 </template>
 
 <style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
-}
-
-h3 {
-  font-size: 1.2rem;
-}
 
 div{
-    background-color: rgb(8, 252, 8);
+    
     color:black;
+    width: 50%;
+    padding-left: 30px;
+    border-radius: 30px;
 }
 
 .liked{
-  background-color: blue;
+  background-color: var(--darkColor);
+  
+  border:solid 1px var(--darkColor);
 }
 
 .notLiked{
-  background-color: rgb(255, 0, 200);
+  background-color: var(--contrast);
+  border:solid 1px var(--contrast);
 }
 </style>

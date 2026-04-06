@@ -23,34 +23,50 @@ onMounted(()=>{
 </script>
 
 <template>
-  <div>
-    <h3>
-      This is the feed
-    </h3>
+  <div id="feed">
+    <div v-for="feed in feedData" :key="feed.id" class="feedCard">
+      <div class="content">
+        <h2>{{ feed.content }}</h2>
+        <p>{{ feed.created_at }}</p>
+
+      </div>
+      <div class="container">
+        <LikeButton :post_id='feed.id' />
+        <ProfileComponent :user_id='feed.user_id'/>
+
+      </div>
+    </div>
   </div>
-  <div v-for="feed in feedData" :key="feed.id">
-    <hr>
-    <h2>{{ feed.content }}</h2>
-    <p>{{ feed.created_at }}</p>
-    <LikeButton :post_id='feed.id' />
-    <ProfileComponent :user_id='feed.user_id'/>
-  </div>
+  
 </template>
 
 <style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
+@media (min-width: 600px) {
+  #feed{
+    width: 50%;
+    min-width: 600px;
+    
+  }
+
+}
+  .feedCard{
+    background-color: var(--whiteColor);
+    border-radius: 30px;
+    margin: 15px;
+  }
+
+  .container {
+  display: flex;
+ 
+  align-items: flex-end;
+  background-color: var(--mediumColor);
+  border-bottom-left-radius: 30px;
+  border-bottom-right-radius: 30px;
+  padding-bottom: 5px;
+  padding-top: 5px;
 }
 
-h3 {
-  font-size: 1.2rem;
-}
-
-div{
-    background-color: aquamarine;
-    color: black;
+.content{
+  padding: 15px;
 }
 </style>

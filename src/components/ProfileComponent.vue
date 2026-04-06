@@ -83,15 +83,11 @@ onMounted(()=>{
 
 <template>
   <div>
-    <p>
       <img src="../assets/defaultProfile.png" alt="default profile pic"> 
       {{ userInfo.displayname }}
       <button v-if="!(friend == 2 || props.user_id == userOwn || connection_id)" v-on:click="sendFriendRequest">follow</button>
       <button v-if="connection_id" v-on:click="accept">Accept request</button>
       <button v-if="connection_id" v-on:click="deny">Deny request</button>
-      
-    
-    </p>
   </div>
 </template>
 
@@ -109,14 +105,20 @@ img {
   border-radius: 15px;
 }
 
-p{
-    text-align: right;
-    background-color: rgb(252, 8, 8);
-}
+
 
 div{
-    background-color: rgb(252, 8, 8);
+    
     color:black;
+    text-align: right;
+    width: 50%;
+    padding-right: 30px;
+    border-radius: 30px;
+}
+
+button{
+  background-color: var(--contrast);
+  border: none;
 }
 
 

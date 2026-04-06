@@ -31,7 +31,7 @@ onMounted(()=>{
     </h3>
   </div>
   <div v-for="friend in friends" :key="friend.id">
-    <hr>
+    
     
     <ProfileComponent :user_id="friend.recipient_id"/>
     <p>Number of shared friends {{ friend.count }}</p>
