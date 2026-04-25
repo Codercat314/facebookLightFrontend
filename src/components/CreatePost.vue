@@ -38,6 +38,13 @@ async function create(){
 </template>
 
 <style scoped>
+
+
+h3 {
+  font-size: 1.2rem;
+}
+
+
 h1 {
   font-weight: 500;
   font-size: 2.6rem;
@@ -45,12 +52,14 @@ h1 {
   top: -10px;
 }
 
-h3 {
-  font-size: 1.2rem;
-}
-
-div{
-    background-color: rgb(105, 252, 8);
-    color:black;
+textarea{
+  width: 100%;
+  height: 30px;
+  font-size: large;
+  margin: 5px;
+  border: none;
+  background-color: var(--lightColor);
+  border-radius: 10px;
+  padding:5px;  
 }
 </style>

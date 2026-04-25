@@ -55,8 +55,14 @@ h3 {
   font-size: 1.2rem;
 }
 
-div{
-    background-color: violet;
-    color:black;
+input{
+  width: 100%;
+  height: 30px;
+  font-size: large;
+  margin: 5px;
+  border: none;
+  background-color: var(--lightColor);
+  border-radius: 10px;
+  padding:5px;  
 }
 </style>
