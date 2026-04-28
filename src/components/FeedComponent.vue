@@ -3,6 +3,7 @@ import axios from 'axios';
 import { onMounted, ref } from 'vue';
 import LikeButton from './LikeButton.vue';
 import ProfileComponent from './ProfileComponent.vue';
+import CommentsField from './CommentsField.vue';
 
 let feedData = ref([])
 
@@ -33,7 +34,10 @@ onMounted(()=>{
       <div class="container">
         <ProfileComponent :user_id='feed.user_id'/>
         <LikeButton :post_id='feed.id' />
-
+        
+      </div>
+      <div class="comments">
+        <CommentsField :post_id="feed.id"/>
       </div>
     </div>
   </div>
@@ -68,5 +72,9 @@ onMounted(()=>{
 
 .content{
   padding: 15px;
+}
+
+.comments{
+  width: 100%;
 }
 </style>
