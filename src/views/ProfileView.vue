@@ -1,8 +1,7 @@
 <script setup>
 import FeedComponent from '@/components/FeedComponent.vue';
 import FriendList from '@/components/FriendList.vue';
-import FriendRequests from '@/components/FriendRequests.vue';
-import RecommendedFriends from '@/components/RecommendedFriends.vue';
+
 import axios from 'axios';
 import { ref, onMounted } from 'vue';
 
