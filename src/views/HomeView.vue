@@ -3,12 +3,14 @@ import FeedComponent from '@/components/FeedComponent.vue';
 import FriendList from '@/components/FriendList.vue';
 import FriendRequests from '@/components/FriendRequests.vue';
 import RecommendedFriends from '@/components/RecommendedFriends.vue';
+import SearchComponent from '@/components/SearchComponent.vue';
 
 
 </script>
 
 <template>
   <main>
+    <SearchComponent/>
     <div class="container2">
       <div class="recommendedAndRequests">
         <FriendRequests/>
