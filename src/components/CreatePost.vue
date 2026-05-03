@@ -1,12 +1,20 @@
 <script setup>
 import axios from 'axios';
-//import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 
 //let feedData = ref([])
-let content;
+let content = ref();
+let submitError = ref();
 
 async function create(){
     try {
+      if (!content.value) {
+        submitError.value = "comment requried"
+        return
+      }else if (content.value.length > 500){
+        submitError.value = "content to long"
+        return
+      }
         let token = localStorage.getItem("accessToken")
         const response = await axios.post('/api/v1/posts', 
         {
@@ -36,9 +44,12 @@ async function create(){
     </h3>
   </div>
   <div>
+    <form @submit.prevent="create">
     <textarea name="content" id="contentArea" v-model="content"></textarea>
     <br>
-    <button v-on:click="create">Publish</button>
+    <button>Publish</button> 
+    </form>
+    <p v-if="submitError"> {{ submitError }}</p>
   </div>
 </template>
 
