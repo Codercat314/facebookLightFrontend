@@ -41,6 +41,7 @@ async function comment(){
         post_id: props.post_id
     });
         console.log(response)
+        getComments()
     } catch (error) {
         console.error('Failed to fetch feeds:', error);
         alert("post failed creating")
