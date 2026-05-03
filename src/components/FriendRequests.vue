@@ -8,8 +8,7 @@ let friends = ref([])
 
 async function getFriendsRequests(){
     try {
-        const userId = localStorage.getItem('userId');
-        console.log(userId)
+        
         const response = await axios.get('/api/v1/friend/requests/');
         friends.value = response.data; // reactive update
         console.log('friend requests loaded:', friends.value);
