@@ -1,6 +1,7 @@
 <script setup>
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
+
 const props = defineProps({
   post_id: {
     type: String,
@@ -9,6 +10,7 @@ const props = defineProps({
 })
 let comments = ref([])
 let content = ref()
+let submitError = ref()
 
 
 async function getComments(){
@@ -26,6 +28,14 @@ async function getComments(){
 
 async function comment(){
     try {
+
+      if (!content.value) {
+        submitError.value = "comment requried"
+        return
+      }else if (content.value.length > 20){
+        submitError.value = "content to long"
+        return
+      }
         const response = await axios.post('/api/v1/comment', {
         content: content.value,
         post_id: props.post_id
@@ -48,7 +58,11 @@ onMounted(()=>{
 
   </div>
   <div>
-    <input type="text" v-model="content"><button v-on:click="comment">Comment!</button>
+    <form @submit.prevent="comment">
+      <input type="text" v-model="content">
+      <button>Comment!</button>
+    </form>
+    <p v-if="submitError"> {{ submitError }}</p>
   </div>
 </template>
 

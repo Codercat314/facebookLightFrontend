@@ -7,10 +7,15 @@ let content;
 
 async function create(){
     try {
-        const response = await axios.post('/api/v1/posts', {
-        content: content,
-        user_id: localStorage.getItem("userId")
-    });
+        let token = localStorage.getItem("accessToken")
+        const response = await axios.post('/api/v1/posts', 
+        {
+        content: content
+        },
+        {headers: 
+        {
+          Authorization: `Bearer ${token}`
+        }});
 
     console.log('Server response:', response.data);
     alert("post created")

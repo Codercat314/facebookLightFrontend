@@ -12,6 +12,7 @@ async function getFeeds(){
         const response = await axios.get('/api/v1/posts');
         feedData.value = response.data; // reactive update
         console.log('Feed loaded:', feedData.value);
+        console.log(feedData.value[0])
     } catch (error) {
         console.error('Failed to fetch feeds:', error);
     }
@@ -25,7 +26,7 @@ onMounted(()=>{
 
 <template>
   <div id="feed">
-    <div v-for="feed in feedData" :key="feed.id" class="feedCard">
+    <div v-for="feed in feedData[0]" :key="feed.id" class="feedCard">
       <div class="content">
         <h2>{{ feed.content }}</h2>
         <p>{{ feed.created_at }}</p>
