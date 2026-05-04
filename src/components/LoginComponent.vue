@@ -21,18 +21,13 @@ async function login(){
 
     } catch (error) {
         console.error('Failed to fetch feeds:', error);
-        alert("fel lösen")
+        alert("wrong password")
     }
 }
 
 </script>
 
 <template>
-  <div>
-    <h3>
-      This is the login
-    </h3>
-  </div>
   <div>
     
     <input type="email" name="email" id="emailId" v-model="email" placeholder="email">
@@ -52,17 +47,15 @@ h1 {
   top: -10px;
 }
 
-h3 {
-  font-size: 1.2rem;
-}
 
-input{
-  width: 100%;
+input, button{
+  width: 96%;
   height: 30px;
   font-size: large;
+  margin-right: 15px;
   margin: 5px;
   border: none;
-  background-color: var(--lightColor);
+  background-color: var(--purple);
   border-radius: 10px;
   padding:5px;  
 }

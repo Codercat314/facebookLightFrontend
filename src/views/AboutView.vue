@@ -22,23 +22,26 @@ function switchState(){
 <template>
   <div class="about">
     <div id="loginOrCreate">
-      <div v-on:click="switchState">Create/switch Accont</div>
         <div v-if="create">
+          <h1>Create account</h1>
           <RegisterComponent/>
         </div>
         <div v-else>
+          <h1>Log in</h1>
           <LoginComponent/>
         </div>
+        <div v-on:click="switchState">click here to Create/switch Accont</div>
       </div>
   </div>
 </template>
 
 <style>
 #loginOrCreate{
-  width: 50%;
+  width: 80%;
+  
   min-width: 600px;
-  background-color: var(--whiteColor);
-  background-color: var(--whiteColor);
+  background-color: var(--blue);
+
   border-radius: 30px;
   margin: 15px;
   padding: 20px;
@@ -49,16 +52,21 @@ function switchState(){
   width: 50%;
   min-width: 600px;
   background-color: var(--whiteColor);
-  background-color: var(--whiteColor);
+
   border-radius: 30px;
   margin: 15px;
   padding: 20px;
   
 }
 
+h1{
+  text-align: center;
+}
+
 .about{
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+
+  align-items: center;
+  justify-content: center;
 }
 </style>
