@@ -4,8 +4,13 @@
   --contrast: #eeac99;
   --mediumColor: #e06377;
   --darkColor: #c83349;
+
+  --purple: #b0aac0;
+  --blue: #c2d4dd;
+  --green:#ddeedd;
+  --gray: #d9d9d9;
 }
 
 body{
-  background-color: var(--lightColor);
+  background-color: var(--green);
 }

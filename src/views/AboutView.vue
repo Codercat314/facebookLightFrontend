@@ -1,11 +1,11 @@
 <script setup>
-import CreatePost from '@/components/CreatePost.vue';
+
 import LoginComponent from '@/components/LoginComponent.vue';
 import RegisterComponent from '@/components/RegisterComponent.vue';
 import { ref } from 'vue';
 
-let userIdCheck = ref()
-userIdCheck.value = localStorage.getItem("userId")
+
+
 //userIdCheck.value = false
 let create = ref()
 
@@ -21,7 +21,7 @@ function switchState(){
 </script>
 <template>
   <div class="about">
-    <div id="loginOrCreate" v-if="!userIdCheck">
+    <div id="loginOrCreate">
       <div v-on:click="switchState">Create/switch Accont</div>
         <div v-if="create">
           <RegisterComponent/>
@@ -30,9 +30,6 @@ function switchState(){
           <LoginComponent/>
         </div>
       </div>
-    <div v-else id="createPost">
-      <CreatePost/>
-    </div>
   </div>
 </template>
 
@@ -58,8 +55,6 @@ function switchState(){
   padding: 20px;
   
 }
-
-
 
 .about{
   display: flex;
