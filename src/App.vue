@@ -18,9 +18,9 @@ import { RouterLink, RouterView } from 'vue-router'
 <style scoped>
 header {
   line-height: 1.5;
-  max-height: 100vh;
-  background-color: var(--whiteColor);
-  margin-bottom: 50px;
+  max-height: 20vh;
+  background-color: var(--purple);
+
 }
 
 .logo {
@@ -80,8 +80,9 @@ nav a:first-of-type {
 
   h1{
     text-align: center;
-    color: var(--darkColor);
-
+    color: var(--color-text);
+    font-size: 5em;
+    font-family: 'Courier New', Courier, monospace;
   }
 }
 </style>
