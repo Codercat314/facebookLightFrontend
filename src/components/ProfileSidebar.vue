@@ -4,6 +4,7 @@ import { onMounted, ref } from 'vue';
 import { useAppStore } from '@/stores/vars'
 import ProfileComponent from '@/components/ProfileComponent.vue';
 import { watch } from 'vue';
+import FollowButton from './FollowButton.vue';
 
 let userInfo = ref(null)
 let user_id = ref()
@@ -15,11 +16,15 @@ user_id.value = store.chosenUser
 const activeTab = ref('friends')
 let requests = ref([])
 let recommended = ref([])
+let loggedInUser = ref()
+loggedInUser.value = user_id.value === localStorage.getItem("userId") ? true : false
 watch(() => store.chosenUser, (newId) => {
   user_id.value = newId
   getUserInfo()
   getFriends()
+  loggedInUser.value = user_id.value === localStorage.getItem("userId") ? true : false
 })
+
 async function getRecommended(){
     try {
         const token = localStorage.getItem("accessToken")
@@ -92,10 +97,13 @@ onMounted(()=>{
         <button class="postsBtn">posts</button>
       </div>
       <img class="profilePic" src="@/assets/defaultProfile.png" alt="profile picture"/>
+      <div v-if="!loggedInUser">
+        <FollowButton/>
+      </div>
       <div class="tabs">
-        <span :class="{ activeTab: activeTab === 'requests' }" @click="activeTab = 'requests'">requests</span>
+        <span :class="{ activeTab: activeTab === 'requests' }" @click="activeTab = 'requests'" v-if="loggedInUser">requests</span>
         <span :class="{ activeTab: activeTab === 'friends' }" @click="activeTab = 'friends'">friends</span>
-        <span :class="{ activeTab: activeTab === 'recommend' }" @click="activeTab = 'recommend'">recommend</span>
+        <span :class="{ activeTab: activeTab === 'recommend' }" @click="activeTab = 'recommend'" v-if="loggedInUser">recommend</span>
       </div>
 
       <div class="tabContent">

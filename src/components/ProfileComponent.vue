@@ -13,26 +13,13 @@ const props = defineProps({
   },
 })
 let userInfo = ref(null)
-let friend = ref(true)
+
 let userOwn = localStorage.getItem("userId")
 const store = useAppStore()
 async function getUserInfo(){
     try {
-        let token = localStorage.getItem("accessToken")
-        console.log(props.post_id)
         const response = await axios.get('/api/v1/you/' + props.user_id);
         userInfo.value = response.data; // reactive update
-        console.log('usernumber loaded:', userInfo.value);
-        console.log(response.data)
-
-        const friendCheck = await axios.get('/api/v1/friend/check/' + props.user_id,{headers: 
-        {
-          Authorization: `Bearer ${token}`
-        }});
-        friend.value = friendCheck.data.status; // reactive update
-        console.log('usernumber loaded:', friend.value);
-        console.log(friendCheck.data)
-    
     } catch (error) {
         console.error('Failed to fetch feeds:', error);
     }

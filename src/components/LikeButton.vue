@@ -32,11 +32,11 @@ async function like(){
 async function getLikeNumber(){
     try {
         
-        console.log(props.post_id)
+       
         const response = await axios.get('/api/v1/like/' + props.post_id);
         likeNumber.value = response.data; // reactive update
-        console.log('likenumber loaded:', likeNumber.value);
-        console.log(response.data)
+        
+        
 
         const didUserLike = await axios.post('/api/v1/likeCheck', {
         post_id: props.post_id,
@@ -44,7 +44,7 @@ async function getLikeNumber(){
     });
 
         buttonLook.value = didUserLike.data; // reactive update
-        console.log('valueif user liked loaded:', buttonLook.value);
+        
     } catch (error) {
         console.error('Failed to fetch feeds:', error);
     }
