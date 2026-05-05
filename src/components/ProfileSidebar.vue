@@ -6,18 +6,18 @@ import ProfileComponent from '@/components/ProfileComponent.vue';
 import { watch } from 'vue';
 import FollowButton from './FollowButton.vue';
 
-let userInfo = ref(null)
-let user_id = ref()
-let friends = ref([])
+const userInfo = ref(null)
+const user_id = ref()
+const friends = ref([])
 const store = useAppStore()
-//only for default
-//store.setUser(localStorage.getItem('userId'))
-user_id.value = store.chosenUser
 const activeTab = ref('friends')
-let requests = ref([])
-let recommended = ref([])
-let loggedInUser = ref()
+const requests = ref([])
+const recommended = ref([])
+const loggedInUser = ref()
+
+user_id.value = store.chosenUser
 loggedInUser.value = user_id.value === localStorage.getItem("userId") ? true : false
+
 watch(() => store.chosenUser, (newId) => {
   user_id.value = newId
   getUserInfo()
@@ -59,14 +59,10 @@ async function getUserInfo(){
         userInfo.value = response.data; // reactive update
         console.log('usernumber loaded:', userInfo.value);
         console.log(response.data)
-
-        
-    
     } catch (error) {
         console.error('Failed to fetch feeds:', error);
     }
 }
-
 
 async function getFriends(){
     try {
@@ -184,5 +180,6 @@ onMounted(()=>{
 }
 .tabContent{
   overflow-y: scroll;
+  height: 40%;
 }
 </style>
