@@ -14,15 +14,13 @@ async function like(){
     try {
         console.log("postLiked")
         
-        const response = await axios.post('/api/v1/like', {
+        await axios.post('/api/v1/like', {
         post_id: props.post_id,
         user_id: localStorage.getItem("userId")
 
         
     });
-    console.log('Server response:', response.data);
-    alert("post created")
-
+      getLikeNumber()
     } catch (error) {
         console.error('Failed to fetch feeds:', error);
         alert("post failed creating")
@@ -31,13 +29,9 @@ async function like(){
 
 async function getLikeNumber(){
     try {
-        
-       
         const response = await axios.get('/api/v1/like/' + props.post_id);
         likeNumber.value = response.data; // reactive update
-        
-        
-
+  
         const didUserLike = await axios.post('/api/v1/likeCheck', {
         post_id: props.post_id,
         user_id: localStorage.getItem("userId")
@@ -74,13 +68,14 @@ div{
 }
 
 .liked{
-  background-color: var(--darkColor);
+  background-color: var(--green);
+  border: 2px solid green;
   
-  border:solid 1px var(--darkColor);
+  
 }
 
 .notLiked{
-  background-color: var(--contrast);
-  border:solid 1px var(--contrast);
+  background-color: var(--gray);
+  
 }
 </style>
