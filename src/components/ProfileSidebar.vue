@@ -40,6 +40,7 @@ async function getRecommended(){
     }
 }
 
+
 async function getFriendRequests(){
     try {
         const token = localStorage.getItem("accessToken")
