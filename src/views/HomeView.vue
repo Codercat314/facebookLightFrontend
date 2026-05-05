@@ -42,22 +42,21 @@ async function search() {
         <button class="addPost" @click="showAddPost = !showAddPost">add post</button>
         <button class="friendsBtn">Friends</button>
       </div>
-    <div class="searchResults" v-if="searchResults">
-      <button class="closeBtn" @click="searchResults = null">✕</button>
-        <div v-for="user in searchResults.users" :key="user.id" class="friendCard">
-          <ProfileComponent :user_id="user.id"/>
-        </div>
-        <div v-for="post in searchResults.posts" :key="post.id" class="searchPost">
-          {{ post.content }}
-        </div>
-    </div>
-
-    <div class="postForm" v-if="showAddPost">
-      <button class="closeBtn" @click="showAddPost = false">✕</button>
-      <CreatePost @postCreated="onPostCreated" />
-    </div>
-      <FeedComponent ref="feedRef" />
-    </div>
+      <div class="searchResults" v-if="searchResults">
+        <button class="closeBtn" @click="searchResults = null">✕</button>
+          <div v-for="user in searchResults.users" :key="user.id" class="friendCard">
+            <ProfileComponent :user_id="user.id"/>
+          </div>
+          <div v-for="post in searchResults.posts" :key="post.id" class="searchPost">
+            {{ post.content }}
+          </div>
+      </div>
+      <div class="postForm" v-if="showAddPost">
+        <button class="closeBtn" @click="showAddPost = false">✕</button>
+        <CreatePost @postCreated="onPostCreated" />
+      </div>
+        <FeedComponent ref="feedRef" />
+      </div>
   </main>
 </template>
 
@@ -75,6 +74,7 @@ main {
 .content {
   width: 66.66%;
   height: 100%;
+  overflow-y: scroll;
 }
 .topBar {
   display: flex;
