@@ -34,10 +34,11 @@ function switchUser(){
 async function accept(){
   try {
         
-        console.log(userOwn)
-        const response = await axios.post('/api/v1/friend/accept', {
-        id : props.connection_id
-    });
+        const token = localStorage.getItem("accessToken")
+        const response = await axios.post('/api/v1/friend/accept', 
+          { id: props.connection_id },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
         console.log(response)
     
   } catch (error) {
