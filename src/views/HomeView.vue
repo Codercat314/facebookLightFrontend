@@ -1,44 +1,36 @@
 <script setup>
-import FeedComponent from '@/components/FeedComponent.vue';
-import FriendList from '@/components/FriendList.vue';
-import FriendRequests from '@/components/FriendRequests.vue';
-import RecommendedFriends from '@/components/RecommendedFriends.vue';
-import SearchComponent from '@/components/SearchComponent.vue';
+
+import ProfileSidebar from '@/components/ProfileSidebar.vue';
+
 
 
 </script>
 
 <template>
   <main>
-    <SearchComponent/>
-    <div class="container2">
-      <div class="recommendedAndRequests">
-        <FriendRequests/>
-        <RecommendedFriends/>
-      </div>
-      <FeedComponent/>
-      <div class="friendList">
-        <FriendList/>
-
-      </div>
+    <div class="sidebar">
+      <ProfileSidebar />
     </div>
-    
+
+    <div class="content">
+      <!-- feed goes here later -->
+    </div>
   </main>
 </template>
 
 <style scoped>
-  .container2 {
+main {
   display: flex;
-  align-items: flex-start;
-  justify-content: flex-start;
+  height: 100vh;
 }
 
-.recommendedAndRequests{
-  width:25%;
+.sidebar {
+  width: 33.33%;
+  height: 100%;
 }
 
-.friendList{
-  width:20%;
+.content {
+  width: 66.66%;
+  height: 100%;
 }
-
 </style>
