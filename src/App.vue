@@ -6,7 +6,7 @@ import {  RouterView } from 'vue-router'
 <template>
   <header>
     <nav>
-      <h1>Catblogg</h1>
+      <h1>Catblog</h1>
     </nav> 
   </header>
   <RouterView />
