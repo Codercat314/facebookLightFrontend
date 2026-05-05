@@ -2,6 +2,7 @@
 import FeedComponent from '@/components/FeedComponent.vue';
 import ProfileSidebar from '@/components/ProfileSidebar.vue';
 import CreatePost from '@/components/CreatePost.vue';
+import ProfileComponent from '@/components/ProfileComponent.vue';
 import { ref } from 'vue';
 import axios from 'axios';
 const showAddPost = ref(false)
@@ -46,9 +47,9 @@ async function search() {
         <div v-for="user in searchResults.users" :key="user.id" class="friendCard">
           <ProfileComponent :user_id="user.id"/>
         </div>
-      <div v-for="post in searchResults.posts" :key="post.id" class="searchPost">
-        {{ post.content }}
-      </div>
+        <div v-for="post in searchResults.posts" :key="post.id" class="searchPost">
+          {{ post.content }}
+        </div>
     </div>
 
     <div class="postForm" v-if="showAddPost">
@@ -126,4 +127,5 @@ main {
   padding: 8px;
   border-bottom: 1px solid rgba(0,0,0,0.1);
 }
+
 </style>
