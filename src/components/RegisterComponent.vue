@@ -33,11 +33,6 @@ async function register(){
 
 <template>
   <div>
-    <h3>
-      This is the registering
-    </h3>
-  </div>
-  <div>
     <input type="text" name="name" id="name" v-model="name" placeholder="name">
     <br>
     <input type="text" name="displayname" id="displayname" v-model="displayname" placeholder="display name">
@@ -59,12 +54,15 @@ h1 {
   top: -10px;
 }
 
-h3 {
-  font-size: 1.2rem;
-}
-
-div{
-    background-color: rgb(223, 226, 27);
-    color:black;
+input, button{
+  width: 96%;
+  height: 30px;
+  font-size: large;
+  margin-right: 15px;
+  margin: 5px;
+  border: none;
+  background-color: var(--purple);
+  border-radius: 10px;
+  padding:5px;  
 }
 </style>

@@ -1,19 +1,34 @@
 <script setup>
 import axios from 'axios';
-//import { onMounted, ref } from 'vue';
+import { ref } from 'vue';
 
 //let feedData = ref([])
-let content;
+let content = ref();
+let submitError = ref();
+const emit = defineEmits(['postCreated'])
 
 async function create(){
     try {
-        const response = await axios.post('/api/v1/posts', {
-        content: content,
-        user_id: localStorage.getItem("userId")
-    });
+      if (!content.value) {
+        submitError.value = "comment requried"
+        return
+      }else if (content.value.length > 500){
+        submitError.value = "content to long"
+        return
+      }
+        let token = localStorage.getItem("accessToken")
+        const response = await axios.post('/api/v1/posts', 
+        {
+        content: content.value
+        },
+        {headers: 
+        {
+          Authorization: `Bearer ${token}`
+        }});
 
     console.log('Server response:', response.data);
-    alert("post created")
+    emit('postCreated')
+    content.value = ''
 
     } catch (error) {
         console.error('Failed to fetch feeds:', error);
@@ -31,13 +46,23 @@ async function create(){
     </h3>
   </div>
   <div>
+    <form @submit.prevent="create">
     <textarea name="content" id="contentArea" v-model="content"></textarea>
     <br>
-    <button v-on:click="create">Publish</button>
+    <button>Publish</button> 
+    </form>
+    <p v-if="submitError"> {{ submitError }}</p>
   </div>
 </template>
 
 <style scoped>
+
+
+h3 {
+  font-size: 1.2rem;
+}
+
+
 h1 {
   font-weight: 500;
   font-size: 2.6rem;
@@ -45,12 +70,14 @@ h1 {
   top: -10px;
 }
 
-h3 {
-  font-size: 1.2rem;
-}
-
-div{
-    background-color: rgb(105, 252, 8);
-    color:black;
+textarea{
+  width: 100%;
+  height: 30px;
+  font-size: large;
+  margin: 5px;
+  border: none;
+  background-color: var(--lightColor);
+  border-radius: 10px;
+  padding:5px;  
 }
 </style>
