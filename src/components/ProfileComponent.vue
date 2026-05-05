@@ -29,20 +29,7 @@ function switchUser(){
   store.setUser(props.user_id)
 }
 
-async function sendFriendRequest(){
-  try {
-        
-        console.log(userOwn)
-        const response = await axios.post('/api/v1/friend/', {
-        sender_id : userOwn,
-        recipient_id : props.user_id
-    });
-        console.log(response)
-    
-  } catch (error) {
-      console.error('Failed to fetch feeds:', error);
-  }
-}
+
 
 async function accept(){
   try {

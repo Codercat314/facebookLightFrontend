@@ -27,6 +27,21 @@ async function getConnection(){
     }
 }
 
+async function sendFriendRequest(){
+  try {
+        
+        
+        const response = await axios.post('/api/v1/friend/', {
+        sender_id : localStorage.getItem("userId"),
+        recipient_id : user_id.value
+    });
+        console.log(response)
+    
+  } catch (error) {
+      console.error('Failed to fetch feeds:', error);
+  }
+}
+
 onMounted(()=>{
   getConnection()
 })
