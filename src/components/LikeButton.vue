@@ -13,13 +13,11 @@ let buttonLook = ref()
 async function like(){
     try {
         console.log("postLiked")
-        
-        await axios.post('/api/v1/like', {
-        post_id: props.post_id,
-        user_id: localStorage.getItem("userId")
-
-        
-    });
+        let token = localStorage.getItem("accessToken")
+        await axios.post('/api/v1/like', 
+    { post_id: props.post_id },
+    { headers: { Authorization: `Bearer ${token}` } }
+);
       getLikeNumber()
     } catch (error) {
         console.error('Failed to fetch feeds:', error);
