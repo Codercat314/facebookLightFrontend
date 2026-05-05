@@ -29,12 +29,15 @@ async function getConnection(){
 
 async function sendFriendRequest(){
   try {
-        
-        
-        const response = await axios.post('/api/v1/friend/', {
-        sender_id : localStorage.getItem("userId"),
-        recipient_id : user_id.value
-    });
+    const token = localStorage.getItem("accessToken")
+    const response = await axios.post('/api/v1/friend/',
+        {
+          recipient_id : user_id.value
+        },
+        {headers: 
+        {
+          Authorization: `Bearer ${token}`
+        }});
         console.log(response)
     
   } catch (error) {
