@@ -27,14 +27,15 @@ async function like(){
 
 async function getLikeNumber(){
     try {
+      let token = localStorage.getItem("accessToken")
         const response = await axios.get('/api/v1/like/' + props.post_id);
         likeNumber.value = response.data; // reactive update
   
-        const didUserLike = await axios.post('/api/v1/likeCheck', {
-        post_id: props.post_id,
-        user_id: localStorage.getItem("userId")
-    });
-
+        const didUserLike = await axios.post('/api/v1/likeCheck', 
+          { post_id: props.post_id },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
+        console.log(didUserLike.value)
         buttonLook.value = didUserLike.data; // reactive update
         
     } catch (error) {
