@@ -48,11 +48,12 @@ async function accept(){
 
 async function deny(){
   try {
-        
+        const token = localStorage.getItem("accessToken")
         console.log(userOwn)
-        const response = await axios.post('/api/v1/friend/deny', {
-        id : props.connection_id
-    });
+        const response = await axios.post('/api/v1/friend/deny', 
+          { id: props.connection_id },
+          { headers: { Authorization: `Bearer ${token}` } }
+        );
         console.log(response)
     
   } catch (error) {
