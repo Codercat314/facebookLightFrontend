@@ -29,11 +29,9 @@ onMounted(()=>{
 
 <template>
   <div id="feed">
-    <div v-for="feed in feedData" :key="feed.id" class="feedCard" @click="selectedPost = feed">
-      <div class="content">
+    <div v-for="feed in feedData" :key="feed.id" class="feedCard" >
+      <div class="content" @click="selectedPost = feed">
         <h2>{{ feed.content }}</h2>
-        <p>{{ feed.created_at }}</p>
-
       </div>
       <div class="container">
         <ProfileComponent :user_id='feed.user_id'/>
@@ -44,14 +42,12 @@ onMounted(()=>{
     </div>
   </div>
   <div class="modalOverlay" v-if="selectedPost" @click.self="selectedPost = null">
-  <div class="modal">
-  <button class="closeBtn" @click="selectedPost = null">✕</button>
-  <p class="postContent">{{ selectedPost.content }}</p>
-  <p class="date">{{ selectedPost.created_at }}</p>
-  <CommentsField :post_id="selectedPost.id"/>
-</div>
-</div>
-  
+    <div class="modal">
+      <button class="closeBtn" @click="selectedPost = null">✕</button>
+      <p class="postContent">{{ selectedPost.content }}</p>
+      <CommentsField :post_id="selectedPost.id"/>
+    </div>
+  </div>
 </template>
 
 <style scoped>
@@ -95,14 +91,8 @@ onMounted(()=>{
   justify-content: center;
   align-items: center;
 }
-
-
-
-
-
-
 .modal {
-  background: var(--gray);
+  background: var(--blue);
   border-radius: 15px;
   padding: 25px;
   width: 40%;
@@ -116,13 +106,6 @@ onMounted(()=>{
   padding: 15px;
   min-height: 80px;
   margin-bottom: 5px;
-}
-
-.date {
-  text-align: right;
-  font-size: 0.8rem;
-  color: grey;
-  margin-bottom: 10px;
 }
 
 .closeBtn {
