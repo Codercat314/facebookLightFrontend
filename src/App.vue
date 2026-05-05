@@ -19,12 +19,7 @@ header {
   background-color: var(--purple);
   margin: none;
 }
-header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-    max-height: 20vh;
-  }
+
 
 h1{
     text-align: center;
