@@ -107,26 +107,26 @@ onMounted(()=>{
       </div>
 
       <div class="tabContent">
-  <div v-if="activeTab === 'requests'">
-    <div v-for="friend in requests" :key="friend.id" class="friendCard">
-      <ProfileComponent :user_id="friend.sender_id" :connection_id="friend.id"/>
-    </div>
-  </div>
-
-  <div v-if="activeTab === 'friends'">
-    <div v-for="friend in friends" :key="friend.id" class="friendCard">
-      <ProfileComponent :user_id="friend.recipient_id"/>
-    </div>
-  </div>
-
-  <div v-if="activeTab === 'recommend'">
-    <div v-if="activeTab === 'recommend'">
-        <div v-for="person in recommended" :key="person.recipient_id" class="friendCard">
-            <ProfileComponent :user_id="person.recipient_id"/>
+        <div v-if="activeTab === 'requests'">
+          <div v-for="friend in requests" :key="friend.id" class="friendCard">
+            <ProfileComponent :user_id="friend.sender_id" :connection_id="friend.id"/>
+          </div>
         </div>
-    </div>
-  </div>
-</div>
+
+        <div v-if="activeTab === 'friends'">
+          <div v-for="friend in friends" :key="friend.id" class="friendCard">
+            <ProfileComponent :user_id="friend.recipient_id"/>
+          </div>
+        </div>
+
+        <div v-if="activeTab === 'recommend'">
+          <div v-if="activeTab === 'recommend'">
+              <div v-for="person in recommended" :key="person.recipient_id" class="friendCard">
+                  <ProfileComponent :user_id="person.recipient_id"/>
+              </div>
+          </div>
+        </div>
+      </div>
     </template>
     <template v-else>
       <p>Loading...</p>
@@ -181,5 +181,8 @@ onMounted(()=>{
 .friendCard {
   padding: 8px;
   border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.tabContent{
+  overflow-y: scroll;
 }
 </style>
