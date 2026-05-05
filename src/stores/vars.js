@@ -2,8 +2,7 @@ import { defineStore } from 'pinia'
 
 export const useAppStore = defineStore('app', {
   state: () => ({
-    chosenUser: '',
-    chosenPost: '',
+    chosenUser: localStorage.getItem('userId'),
   }),
   actions: {
     setUser(name) {

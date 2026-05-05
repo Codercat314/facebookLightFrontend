@@ -54,38 +54,49 @@ onMounted(()=>{
 </script>
 
 <template>
-  <div v-for="comment in comments" :key="comment.id">
-    <p>{{ comment.content }} // {{ comment.displayname }}</p>
-
-  </div>
   <div>
-    <form @submit.prevent="comment">
-      <input type="text" v-model="content">
-      <button>Comment!</button>
-    </form>
-    <p v-if="submitError"> {{ submitError }}</p>
+    <div v-for="comment in comments" :key="comment.id" class="commentRow">
+      <p>{{ comment.content }}</p>
+      <p>// {{ comment.displayname }}</p>
+    </div>
+    <div class="commentInput">
+      <input type="text" v-model="content" placeholder="new comment"/>
+      <button @click="comment">post</button>
+    </div>
+    <p v-if="submitError">{{ submitError }}</p>
   </div>
 </template>
-
 <style scoped>
 
-div{
-    
-    color:black;
-    width: 50%;
-    padding-left: 30px;
-    border-radius: 30px;
-    text-align: right;
+.commentRow {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  background: var(--purple);
+  border-radius: 8px;
+  margin-bottom: 5px;
+  color: black;
 }
 
-.liked{
-  background-color: var(--darkColor);
-  
-  border:solid 1px var(--darkColor);
+.commentInput {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 8px;
 }
 
-.notLiked{
-  background-color: var(--contrast);
-  border:solid 1px var(--contrast);
+.commentInput input {
+  flex: 1;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: none;
+  background: var(--purple);
+}
+
+.commentInput button {
+  padding: 8px 15px;
+  border-radius: 8px;
+  border: none;
+  cursor: pointer;
+  background: var(--purple);
 }
 </style>

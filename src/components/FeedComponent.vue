@@ -6,12 +6,15 @@ import ProfileComponent from './ProfileComponent.vue';
 import CommentsField from './CommentsField.vue';
 
 let feedData = ref([])
+defineExpose({ getFeeds })
+const selectedPost = ref(null)
 
 async function getFeeds(){
     try {
         const response = await axios.get('/api/v1/posts');
         feedData.value = response.data; // reactive update
         console.log('Feed loaded:', feedData.value);
+        
         console.log(feedData.value[0])
     } catch (error) {
         console.error('Failed to fetch feeds:', error);
@@ -26,7 +29,7 @@ onMounted(()=>{
 
 <template>
   <div id="feed">
-    <div v-for="feed in feedData[0]" :key="feed.id" class="feedCard">
+    <div v-for="feed in feedData" :key="feed.id" class="feedCard" @click="selectedPost = feed">
       <div class="content">
         <h2>{{ feed.content }}</h2>
         <p>{{ feed.created_at }}</p>
@@ -37,21 +40,23 @@ onMounted(()=>{
         <LikeButton :post_id='feed.id' />
         
       </div>
-      <div class="comments">
-        <CommentsField :post_id="feed.id"/>
-      </div>
+      
     </div>
   </div>
+  <div class="modalOverlay" v-if="selectedPost" @click.self="selectedPost = null">
+  <div class="modal">
+  <button class="closeBtn" @click="selectedPost = null">✕</button>
+  <p class="postContent">{{ selectedPost.content }}</p>
+  <p class="date">{{ selectedPost.created_at }}</p>
+  <CommentsField :post_id="selectedPost.id"/>
+</div>
+</div>
   
 </template>
 
 <style scoped>
 @media (min-width: 600px) {
-  #feed{
-    width: 50%;
-    min-width: 600px;
-    
-  }
+  
 
 }
   .feedCard{
@@ -64,7 +69,7 @@ onMounted(()=>{
   display: flex;
  
   align-items: flex-end;
-  background-color: var(--mediumColor);
+  background-color: var(--blue);
   border-bottom-left-radius: 30px;
   border-bottom-right-radius: 30px;
   padding-bottom: 5px;
@@ -77,5 +82,56 @@ onMounted(()=>{
 
 .comments{
   width: 100%;
+}
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+
+
+
+
+
+.modal {
+  background: var(--gray);
+  border-radius: 15px;
+  padding: 25px;
+  width: 40%;
+  min-width: 400px;
+  position: relative;
+}
+
+.postContent {
+  background: white;
+  border-radius: 10px;
+  padding: 15px;
+  min-height: 80px;
+  margin-bottom: 5px;
+}
+
+.date {
+  text-align: right;
+  font-size: 0.8rem;
+  color: grey;
+  margin-bottom: 10px;
+}
+
+.closeBtn {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 1.2rem;
 }
 </style>

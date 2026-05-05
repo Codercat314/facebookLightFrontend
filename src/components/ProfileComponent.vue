@@ -1,6 +1,7 @@
 <script setup>
 import axios from 'axios';
 import { onMounted, ref } from 'vue';
+import { useAppStore } from '@/stores/vars'
 const props = defineProps({
   user_id: {
     type: String,
@@ -11,9 +12,10 @@ const props = defineProps({
     required: false,
   },
 })
-let userInfo = ref("default")
+let userInfo = ref(null)
 let friend = ref(true)
 let userOwn = localStorage.getItem("userId")
+const store = useAppStore()
 async function getUserInfo(){
     try {
         let token = localStorage.getItem("accessToken")
@@ -34,6 +36,10 @@ async function getUserInfo(){
     } catch (error) {
         console.error('Failed to fetch feeds:', error);
     }
+}
+
+function switchUser(){
+  store.setUser(props.user_id)
 }
 
 async function sendFriendRequest(){
@@ -86,11 +92,17 @@ onMounted(()=>{
 
 <template>
   <div>
-      <img src="../assets/defaultProfile.png" alt="default profile pic"> 
-      {{ userInfo.displayname }}
-      <button v-if="!(friend == 2 || props.user_id == userOwn || connection_id)" v-on:click="sendFriendRequest">follow</button>
-      <button v-if="connection_id" v-on:click="accept">Accept request</button>
-      <button v-if="connection_id" v-on:click="deny">Deny request</button>
+    <template v-if="userInfo && userInfo.user">
+      <div v-on:click="switchUser">
+        <img src="../assets/defaultProfile.png" alt="default profile pic"> 
+        {{ userInfo.user.displayname }}
+      </div>
+      
+      <span v-if="connection_id">
+        <button @click="accept">✓</button>
+        <button @click="deny">✗</button>
+      </span>
+    </template>
   </div>
 </template>
 

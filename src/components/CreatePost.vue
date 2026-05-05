@@ -5,6 +5,7 @@ import { ref } from 'vue';
 //let feedData = ref([])
 let content = ref();
 let submitError = ref();
+const emit = defineEmits(['postCreated'])
 
 async function create(){
     try {
@@ -18,7 +19,7 @@ async function create(){
         let token = localStorage.getItem("accessToken")
         const response = await axios.post('/api/v1/posts', 
         {
-        content: content
+        content: content.value
         },
         {headers: 
         {
@@ -26,7 +27,8 @@ async function create(){
         }});
 
     console.log('Server response:', response.data);
-    alert("post created")
+    emit('postCreated')
+    content.value = ''
 
     } catch (error) {
         console.error('Failed to fetch feeds:', error);
