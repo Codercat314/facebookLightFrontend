@@ -1,69 +1,66 @@
 <script setup>
-import axios from 'axios';
-import { onMounted, ref } from 'vue';
-import { useAppStore } from '@/stores/vars'
-const props = defineProps({
-  user_id: {
-    type: String,
-    required: true,
-  },
-  connection_id: {
-    type: String,
-    required: false,
-  },
-})
-let userInfo = ref(null)
+  import axios from 'axios';
+  import { onMounted, ref } from 'vue';
+  import { useAppStore } from '@/stores/vars'
+  const props = defineProps({
+    user_id: {
+      type: String,
+      required: true,
+    },
+    connection_id: {
+      type: String,
+      required: false,
+    },
+  })
+  let userInfo = ref(null)
 
-let userOwn = localStorage.getItem("userId")
-const store = useAppStore()
-async function getUserInfo(){
+  const store = useAppStore()
+  async function getUserInfo(){
+      try {
+          const response = await axios.get('/api/v1/you/' + props.user_id);
+          userInfo.value = response.data; // reactive update
+      } catch (error) {
+          console.error('Failed to fetch feeds:', error);
+      }
+  }
+
+  function switchUser(){
+    store.setUser(props.user_id)
+  }
+
+  async function accept(){
     try {
-        const response = await axios.get('/api/v1/you/' + props.user_id);
-        userInfo.value = response.data; // reactive update
+          
+          const token = localStorage.getItem("accessToken")
+          const response = await axios.post('/api/v1/friend/accept', 
+            { id: props.connection_id },
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+          console.log(response)
+      
     } catch (error) {
         console.error('Failed to fetch feeds:', error);
     }
-}
-
-function switchUser(){
-  store.setUser(props.user_id)
-}
-
-
-
-async function accept(){
-  try {
-        
-        const token = localStorage.getItem("accessToken")
-        const response = await axios.post('/api/v1/friend/accept', 
-          { id: props.connection_id },
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        console.log(response)
-    
-  } catch (error) {
-      console.error('Failed to fetch feeds:', error);
   }
-}
 
-async function deny(){
-  try {
-        const token = localStorage.getItem("accessToken")
-        console.log(userOwn)
-        const response = await axios.post('/api/v1/friend/deny', 
-          { id: props.connection_id },
-          { headers: { Authorization: `Bearer ${token}` } }
-        );
-        console.log(response)
-    
-  } catch (error) {
-      console.error('Failed to fetch feeds:', error);
+  async function deny(){
+    try {
+          const token = localStorage.getItem("accessToken")
+          
+          const response = await axios.post('/api/v1/friend/deny', 
+            { id: props.connection_id },
+            { headers: { Authorization: `Bearer ${token}` } }
+          );
+          console.log(response)
+      
+    } catch (error) {
+        console.error('Failed to fetch feeds:', error);
+    }
   }
-}
 
-onMounted(()=>{
-  getUserInfo()
-})
+  onMounted(()=>{
+    getUserInfo()
+  })
 </script>
 
 <template>

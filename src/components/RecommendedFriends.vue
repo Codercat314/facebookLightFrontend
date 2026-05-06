@@ -1,27 +1,27 @@
 <script setup>
-import axios from 'axios';
-import { onMounted, ref } from 'vue';
-import ProfileComponent from './ProfileComponent.vue';
+  import axios from 'axios';
+  import { onMounted, ref } from 'vue';
+  import ProfileComponent from './ProfileComponent.vue';
 
 
-let friends = ref([])
+  let friends = ref([])
 
-async function getFriends(){
-    try {
-        const userId = localStorage.getItem('userId');
-        console.log(userId)
-        const response = await axios.get('/api/v1/friend/recommended/');
-        friends.value = response.data; // reactive update
-        console.log('friends loaded:', friends.value);
-    } catch (error) {
-        console.error('Failed to fetch friends:', error);
-    }
-}
+  async function getFriends(){
+      try {
+          const userId = localStorage.getItem('userId');
+          console.log(userId)
+          const response = await axios.get('/api/v1/friend/recommended/');
+          friends.value = response.data; // reactive update
+          console.log('friends loaded:', friends.value);
+      } catch (error) {
+          console.error('Failed to fetch friends:', error);
+      }
+  }
 
 
-onMounted(()=>{
-    getFriends()
-})
+  onMounted(()=>{
+      getFriends()
+  })
 </script>
 
 <template>

@@ -13,14 +13,11 @@ async function login(){
         password: password
     });
 
-    console.log('Server response:', response.data);
-    alert("hejhej")
-
-    localStorage.setItem("userId", response.data.$user.id)
-    localStorage.setItem("userName", response.data.$user.name)
-    localStorage.setItem("userEmail", response.data.$user.email)
-    localStorage.setItem("accessToken", response.data.access_token)
-    router.push("/")
+        localStorage.setItem("userId", response.data.$user.id)
+        localStorage.setItem("userName", response.data.$user.name)
+        localStorage.setItem("userEmail", response.data.$user.email)
+        localStorage.setItem("accessToken", response.data.access_token)
+        router.push("/")
     } catch (error) {
         console.error('Failed to fetch feeds:', error);
         alert("wrong password")

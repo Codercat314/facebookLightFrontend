@@ -9,7 +9,7 @@ let friends = ref([])
 async function getFriends(){
     try {
         const userId = localStorage.getItem('userId');
-        console.log(userId)
+        
         const response = await axios.get('/api/v1/friend/list/' + userId);
         friends.value = response.data; // reactive update
         console.log('friends loaded:', friends.value);

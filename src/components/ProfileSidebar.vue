@@ -1,85 +1,85 @@
 <script setup>
-import axios from 'axios';
-import { onMounted, ref } from 'vue';
-import { useAppStore } from '@/stores/vars'
-import ProfileComponent from '@/components/ProfileComponent.vue';
-import { watch } from 'vue';
-import FollowButton from './FollowButton.vue';
+  import axios from 'axios';
+  import { onMounted, ref } from 'vue';
+  import { useAppStore } from '@/stores/vars'
+  import ProfileComponent from '@/components/ProfileComponent.vue';
+  import { watch } from 'vue';
+  import FollowButton from './FollowButton.vue';
 
-const userInfo = ref(null)
-const user_id = ref()
-const friends = ref([])
-const store = useAppStore()
-const activeTab = ref('friends')
-const requests = ref([])
-const recommended = ref([])
-const loggedInUser = ref()
+  const userInfo = ref(null)
+  const user_id = ref()
+  const friends = ref([])
+  const store = useAppStore()
+  const activeTab = ref('friends')
+  const requests = ref([])
+  const recommended = ref([])
+  const loggedInUser = ref()
 
-user_id.value = store.chosenUser
-loggedInUser.value = user_id.value === localStorage.getItem("userId") ? true : false
-
-watch(() => store.chosenUser, (newId) => {
-  user_id.value = newId
-  getUserInfo()
-  getFriends()
+  user_id.value = store.chosenUser
   loggedInUser.value = user_id.value === localStorage.getItem("userId") ? true : false
-})
 
-async function getRecommended(){
-    try {
-        const token = localStorage.getItem("accessToken")
-        const response = await axios.get('/api/v1/friend/recommended/', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-        recommended.value = response.data;
-        console.log(recommended.value)
-    } catch (error) {
-        console.error('Failed to fetch recommended:', error);
-    }
-}
+  watch(() => store.chosenUser, (newId) => {
+    user_id.value = newId
+    getUserInfo()
+    getFriends()
+    loggedInUser.value = user_id.value === localStorage.getItem("userId") ? true : false
+  })
+
+  async function getRecommended(){
+      try {
+          const token = localStorage.getItem("accessToken")
+          const response = await axios.get('/api/v1/friend/recommended/', {
+              headers: {
+                  Authorization: `Bearer ${token}`
+              }
+          });
+          recommended.value = response.data;
+          console.log(recommended.value)
+      } catch (error) {
+          console.error('Failed to fetch recommended:', error);
+      }
+  }
 
 
-async function getFriendRequests(){
-    try {
-        const token = localStorage.getItem("accessToken")
-        const response = await axios.get('/api/v1/friend/requests/', {
-            headers: {
-                Authorization: `Bearer ${token}`
-            }
-        });
-        requests.value = response.data;
-    } catch (error) {
-        console.error('Failed to fetch friend requests:', error);
-    }
-}
-async function getUserInfo(){
-    try {
-        const response = await axios.get('/api/v1/you/' + user_id.value);
-        userInfo.value = response.data; // reactive update
-        console.log('usernumber loaded:', userInfo.value);
-        console.log(response.data)
-    } catch (error) {
-        console.error('Failed to fetch feeds:', error);
-    }
-}
+  async function getFriendRequests(){
+      try {
+          const token = localStorage.getItem("accessToken")
+          const response = await axios.get('/api/v1/friend/requests/', {
+              headers: {
+                  Authorization: `Bearer ${token}`
+              }
+          });
+          requests.value = response.data;
+      } catch (error) {
+          console.error('Failed to fetch friend requests:', error);
+      }
+  }
+  async function getUserInfo(){
+      try {
+          const response = await axios.get('/api/v1/you/' + user_id.value);
+          userInfo.value = response.data; // reactive update
+          console.log('usernumber loaded:', userInfo.value);
+          console.log(response.data)
+      } catch (error) {
+          console.error('Failed to fetch feeds:', error);
+      }
+  }
 
-async function getFriends(){
-    try {
-        const response = await axios.get('/api/v1/friend/list/' + user_id.value);
-        friends.value = response.data;
-    } catch (error) {
-        console.error('Failed to fetch friends:', error);
-    }
-}
+  async function getFriends(){
+      try {
+          const response = await axios.get('/api/v1/friend/list/' + user_id.value);
+          friends.value = response.data;
+      } catch (error) {
+          console.error('Failed to fetch friends:', error);
+      }
+  }
 
-onMounted(()=>{
-  getUserInfo()
-  getFriends()
-  getFriendRequests()
-  getRecommended()
-})
+  onMounted(()=>{
+    getUserInfo()
+    getFriends()
+    getFriendRequests()
+    getRecommended()
+  })
 
 </script>
 

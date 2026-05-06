@@ -10,7 +10,7 @@ const emit = defineEmits(['postCreated'])
 async function create(){
     try {
       if (!content.value) {
-        submitError.value = "comment requried"
+        submitError.value = "content requried"
         return
       }else if (content.value.length > 500){
         submitError.value = "content to long"
@@ -26,9 +26,9 @@ async function create(){
           Authorization: `Bearer ${token}`
         }});
 
-    console.log('Server response:', response.data);
-    emit('postCreated')
-    content.value = ''
+      console.log('Server response:', response.data);
+      emit('postCreated')
+      content.value = ''
 
     } catch (error) {
         console.error('Failed to fetch feeds:', error);

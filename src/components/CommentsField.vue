@@ -28,14 +28,15 @@ async function getComments(){
 
 async function comment(){
     try {
-
+      //validate input
       if (!content.value) {
         submitError.value = "comment requried"
         return
       }else if (content.value.length > 100){
         submitError.value = "content to long"
         return
-      }
+      } 
+        //send comment
         const response = await axios.post('/api/v1/comment', {
         content: content.value,
         post_id: props.post_id

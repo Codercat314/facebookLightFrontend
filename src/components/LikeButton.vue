@@ -15,8 +15,8 @@ async function like(){
         console.log("postLiked")
         let token = localStorage.getItem("accessToken")
         await axios.post('/api/v1/like', 
-    { post_id: props.post_id },
-    { headers: { Authorization: `Bearer ${token}` } }
+          { post_id: props.post_id },
+          { headers: { Authorization: `Bearer ${token}` } }
 );
       getLikeNumber()
     } catch (error) {

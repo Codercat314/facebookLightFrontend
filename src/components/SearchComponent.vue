@@ -1,19 +1,19 @@
 <script setup>
-import axios from 'axios';
-import { ref } from 'vue';
+  import axios from 'axios';
+  import { ref } from 'vue';
 
-let content = ref()
-let searchData = ref([])
+  let content = ref()
+  let searchData = ref([])
 
-async function search(){
-    try {
-        const response = await axios.get('/api/v1/search/' + content.value);
-        searchData.value = response.data; // reactive update
-        
-    } catch (error) {
-        console.error('Failed to fetch friends:', error);
-    }
-}
+  async function search(){
+      try {
+          const response = await axios.get('/api/v1/search/' + content.value);
+          searchData.value = response.data; // reactive update
+          
+      } catch (error) {
+          console.error('Failed to fetch friends:', error);
+      }
+  }
 
 </script>
 

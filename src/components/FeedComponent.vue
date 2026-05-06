@@ -36,11 +36,10 @@ onMounted(()=>{
       <div class="container">
         <ProfileComponent :user_id='feed.user_id'/>
         <LikeButton :post_id='feed.id' />
-        
       </div>
-      
     </div>
   </div>
+  <!--Overlay with menu-->
   <div class="modalOverlay" v-if="selectedPost" @click.self="selectedPost = null">
     <div class="modal">
       <button class="closeBtn" @click="selectedPost = null">✕</button>
